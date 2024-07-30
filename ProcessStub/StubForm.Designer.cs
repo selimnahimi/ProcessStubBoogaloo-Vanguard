@@ -31,6 +31,7 @@ namespace ProcessStub
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(StubForm));
             this.label5 = new System.Windows.Forms.Label();
             this.pnTarget = new System.Windows.Forms.Panel();
+            this.btnRehook = new System.Windows.Forms.Button();
             this.btnUnloadTarget = new System.Windows.Forms.Button();
             this.btnBrowseTarget = new System.Windows.Forms.Button();
             this.lbTarget = new System.Windows.Forms.Label();
@@ -45,7 +46,8 @@ namespace ProcessStub
             this.btnRefreshDomains = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.tbAutoAttach = new System.Windows.Forms.TextBox();
-            this.btnRehook = new System.Windows.Forms.Button();
+            this.label6 = new System.Windows.Forms.Label();
+            this.tbBlacklistText = new System.Windows.Forms.TextBox();
             this.pnTarget.SuspendLayout();
             this.pnSideBar.SuspendLayout();
             this.SuspendLayout();
@@ -72,9 +74,28 @@ namespace ProcessStub
             this.pnTarget.Controls.Add(this.lbTarget);
             this.pnTarget.Location = new System.Drawing.Point(129, 49);
             this.pnTarget.Name = "pnTarget";
-            this.pnTarget.Size = new System.Drawing.Size(359, 130);
+            this.pnTarget.Size = new System.Drawing.Size(565, 130);
             this.pnTarget.TabIndex = 13;
             this.pnTarget.Tag = "color:dark1";
+            // 
+            // btnRehook
+            // 
+            this.btnRehook.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnRehook.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
+            this.btnRehook.FlatAppearance.BorderSize = 0;
+            this.btnRehook.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnRehook.Font = new System.Drawing.Font("Segoe UI", 8F);
+            this.btnRehook.ForeColor = System.Drawing.Color.White;
+            this.btnRehook.Location = new System.Drawing.Point(371, 12);
+            this.btnRehook.Name = "btnRehook";
+            this.btnRehook.Size = new System.Drawing.Size(88, 29);
+            this.btnRehook.TabIndex = 43;
+            this.btnRehook.TabStop = false;
+            this.btnRehook.Tag = "color:dark2";
+            this.btnRehook.Text = "Re-hook";
+            this.btnRehook.UseVisualStyleBackColor = false;
+            this.btnRehook.Visible = false;
+            this.btnRehook.Click += new System.EventHandler(this.btnRehook_Click);
             // 
             // btnUnloadTarget
             // 
@@ -84,7 +105,7 @@ namespace ProcessStub
             this.btnUnloadTarget.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnUnloadTarget.Font = new System.Drawing.Font("Segoe UI", 8F);
             this.btnUnloadTarget.ForeColor = System.Drawing.Color.White;
-            this.btnUnloadTarget.Location = new System.Drawing.Point(259, 11);
+            this.btnUnloadTarget.Location = new System.Drawing.Point(465, 11);
             this.btnUnloadTarget.Name = "btnUnloadTarget";
             this.btnUnloadTarget.Size = new System.Drawing.Size(88, 29);
             this.btnUnloadTarget.TabIndex = 42;
@@ -122,7 +143,7 @@ namespace ProcessStub
             this.lbTarget.Location = new System.Drawing.Point(12, 49);
             this.lbTarget.Name = "lbTarget";
             this.lbTarget.Padding = new System.Windows.Forms.Padding(3, 6, 1, 1);
-            this.lbTarget.Size = new System.Drawing.Size(335, 72);
+            this.lbTarget.Size = new System.Drawing.Size(541, 72);
             this.lbTarget.TabIndex = 36;
             this.lbTarget.Tag = "color:dark3";
             this.lbTarget.Text = "No target selected";
@@ -138,7 +159,7 @@ namespace ProcessStub
             this.btnTargetSettings.Font = new System.Drawing.Font("Segoe UI", 8F);
             this.btnTargetSettings.ForeColor = System.Drawing.Color.OrangeRed;
             this.btnTargetSettings.Image = ((System.Drawing.Image)(resources.GetObject("btnTargetSettings.Image")));
-            this.btnTargetSettings.Location = new System.Drawing.Point(456, 13);
+            this.btnTargetSettings.Location = new System.Drawing.Point(662, 13);
             this.btnTargetSettings.Name = "btnTargetSettings";
             this.btnTargetSettings.Size = new System.Drawing.Size(32, 32);
             this.btnTargetSettings.TabIndex = 172;
@@ -157,7 +178,7 @@ namespace ProcessStub
             this.pnSideBar.Dock = System.Windows.Forms.DockStyle.Left;
             this.pnSideBar.Location = new System.Drawing.Point(0, 0);
             this.pnSideBar.Name = "pnSideBar";
-            this.pnSideBar.Size = new System.Drawing.Size(118, 261);
+            this.pnSideBar.Size = new System.Drawing.Size(118, 410);
             this.pnSideBar.TabIndex = 174;
             this.pnSideBar.Tag = "color:dark3";
             // 
@@ -167,7 +188,7 @@ namespace ProcessStub
             this.label4.BackColor = System.Drawing.Color.Transparent;
             this.label4.Font = new System.Drawing.Font("Segoe UI", 8F);
             this.label4.ForeColor = System.Drawing.Color.White;
-            this.label4.Location = new System.Drawing.Point(9, 125);
+            this.label4.Location = new System.Drawing.Point(9, 274);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(102, 127);
             this.label4.TabIndex = 124;
@@ -213,11 +234,11 @@ namespace ProcessStub
             this.tbFilterText.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(31)))), ((int)(((byte)(32)))));
             this.tbFilterText.Font = new System.Drawing.Font("Segoe UI", 8F);
             this.tbFilterText.ForeColor = System.Drawing.Color.White;
-            this.tbFilterText.Location = new System.Drawing.Point(219, 191);
+            this.tbFilterText.Location = new System.Drawing.Point(129, 221);
             this.tbFilterText.Multiline = true;
             this.tbFilterText.Name = "tbFilterText";
             this.tbFilterText.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.tbFilterText.Size = new System.Drawing.Size(190, 34);
+            this.tbFilterText.Size = new System.Drawing.Size(218, 153);
             this.tbFilterText.TabIndex = 175;
             this.tbFilterText.Tag = "color:dark2";
             this.tbFilterText.Text = ".exe\r\n.dll";
@@ -229,11 +250,11 @@ namespace ProcessStub
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Segoe UI", 8F);
             this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(138, 194);
+            this.label1.Location = new System.Drawing.Point(131, 204);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(75, 26);
+            this.label1.Size = new System.Drawing.Size(83, 13);
             this.label1.TabIndex = 176;
-            this.label1.Text = "Filter text:\r\n(one per line)";
+            this.label1.Text = "Filter (Include):";
             // 
             // btnRefreshDomains
             // 
@@ -243,7 +264,7 @@ namespace ProcessStub
             this.btnRefreshDomains.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnRefreshDomains.Font = new System.Drawing.Font("Segoe UI", 8F);
             this.btnRefreshDomains.ForeColor = System.Drawing.Color.White;
-            this.btnRefreshDomains.Location = new System.Drawing.Point(415, 191);
+            this.btnRefreshDomains.Location = new System.Drawing.Point(621, 340);
             this.btnRefreshDomains.Name = "btnRefreshDomains";
             this.btnRefreshDomains.Size = new System.Drawing.Size(73, 61);
             this.btnRefreshDomains.TabIndex = 43;
@@ -261,7 +282,7 @@ namespace ProcessStub
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Segoe UI", 8F);
             this.label3.ForeColor = System.Drawing.Color.White;
-            this.label3.Location = new System.Drawing.Point(138, 236);
+            this.label3.Location = new System.Drawing.Point(138, 385);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(93, 13);
             this.label3.TabIndex = 178;
@@ -272,41 +293,51 @@ namespace ProcessStub
             this.tbAutoAttach.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tbAutoAttach.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(31)))), ((int)(((byte)(32)))));
-            this.tbAutoAttach.Enabled = true;
             this.tbAutoAttach.Font = new System.Drawing.Font("Segoe UI", 8F);
             this.tbAutoAttach.ForeColor = System.Drawing.Color.White;
-            this.tbAutoAttach.Location = new System.Drawing.Point(237, 231);
+            this.tbAutoAttach.Location = new System.Drawing.Point(237, 380);
             this.tbAutoAttach.Multiline = true;
             this.tbAutoAttach.Name = "tbAutoAttach";
-            this.tbAutoAttach.Size = new System.Drawing.Size(172, 21);
+            this.tbAutoAttach.Size = new System.Drawing.Size(378, 21);
             this.tbAutoAttach.TabIndex = 177;
             this.tbAutoAttach.Tag = "color:dark2";
             // 
-            // btnRehook
+            // label6
             // 
-            this.btnRehook.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnRehook.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
-            this.btnRehook.FlatAppearance.BorderSize = 0;
-            this.btnRehook.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnRehook.Font = new System.Drawing.Font("Segoe UI", 8F);
-            this.btnRehook.ForeColor = System.Drawing.Color.White;
-            this.btnRehook.Location = new System.Drawing.Point(165, 12);
-            this.btnRehook.Name = "btnRehook";
-            this.btnRehook.Size = new System.Drawing.Size(88, 29);
-            this.btnRehook.TabIndex = 43;
-            this.btnRehook.TabStop = false;
-            this.btnRehook.Tag = "color:dark2";
-            this.btnRehook.Text = "Re-hook";
-            this.btnRehook.UseVisualStyleBackColor = false;
-            this.btnRehook.Visible = false;
-            this.btnRehook.Click += new System.EventHandler(this.btnRehook_Click);
+            this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Segoe UI", 8F);
+            this.label6.ForeColor = System.Drawing.Color.White;
+            this.label6.Location = new System.Drawing.Point(350, 204);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(99, 13);
+            this.label6.TabIndex = 179;
+            this.label6.Text = "Blacklist (Exclude):";
+            // 
+            // tbBlacklistText
+            // 
+            this.tbBlacklistText.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbBlacklistText.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(31)))), ((int)(((byte)(32)))));
+            this.tbBlacklistText.Font = new System.Drawing.Font("Segoe UI", 8F);
+            this.tbBlacklistText.ForeColor = System.Drawing.Color.White;
+            this.tbBlacklistText.Location = new System.Drawing.Point(353, 221);
+            this.tbBlacklistText.Multiline = true;
+            this.tbBlacklistText.Name = "tbBlacklistText";
+            this.tbBlacklistText.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.tbBlacklistText.Size = new System.Drawing.Size(222, 153);
+            this.tbBlacklistText.TabIndex = 180;
+            this.tbBlacklistText.Tag = "color:dark2";
+            this.tbBlacklistText.Text = "steamclient.dll\r\nSteam.dll\r\nGameOverlayRenderer.dll\r\nsteam_api.dll\r\nlauncher.dll\r" +
+    "\ncrashhandler.dll";
             // 
             // StubForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
-            this.ClientSize = new System.Drawing.Size(500, 261);
+            this.ClientSize = new System.Drawing.Size(706, 410);
+            this.Controls.Add(this.tbBlacklistText);
+            this.Controls.Add(this.label6);
             this.Controls.Add(this.btnRefreshDomains);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label1);
@@ -321,7 +352,7 @@ namespace ProcessStub
             this.MinimumSize = new System.Drawing.Size(516, 300);
             this.Name = "StubForm";
             this.Tag = "color:dark2";
-            this.Text = "ProcessStub";
+            this.Text = "ProcessStub(Boogaloo)";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.StubForm_FormClosing);
             this.Load += new System.EventHandler(this.StubForm_Load);
             this.pnTarget.ResumeLayout(false);
@@ -350,6 +381,8 @@ namespace ProcessStub
         public System.Windows.Forms.TextBox tbAutoAttach;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button btnRehook;
+        private System.Windows.Forms.Label label6;
+        public System.Windows.Forms.TextBox tbBlacklistText;
     }
 }
 

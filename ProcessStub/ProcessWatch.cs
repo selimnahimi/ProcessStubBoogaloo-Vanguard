@@ -16,10 +16,11 @@ namespace ProcessStub
 
     public static class ProcessWatch
     {
-        public static string ProcessStubVersion = "0.1.6";
+        public static string ProcessStubVersion = "0.1.6b";
         public static string currentDir = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
         public static Process p;
         public static bool UseFiltering = true;
+        public static bool UseUserBlacklisting = true;
         public static bool UseExceptionHandler = false;
         public static bool UseBlacklist = true;
         public static bool SuspendProcess = false;
@@ -97,6 +98,7 @@ By clicking 'Yes' you agree that you have read this warning in full and are awar
             UseBlacklist = Params.ReadParam("USEBLACKLIST") != "False";
             SuspendProcess = Params.ReadParam("SUSPENDPROCESS") == "True";
             UseFiltering = Params.ReadParam("USEFILTERING") != "False";
+            UseUserBlacklisting = Params.ReadParam("USEUSERBLACKLIST") != "False";
         }
 
         private static void CorruptTimer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
@@ -378,7 +380,10 @@ By clicking 'Yes' you agree that you have read this warning in full and are awar
                             if (string.IsNullOrWhiteSpace(name))
                                 name = "UNKNOWN";
                             var filters = S.GET<StubForm>().tbFilterText.Text.Split('\n').Select(x => x.Trim()).ToArray();
-                            if (!UseFiltering || filters.Any(x => name.ToUpper().Contains(x.ToUpper())))
+                            var user_blacklist = S.GET<StubForm>().tbBlacklistText.Text.Split('\n').Select(x => x.Trim()).ToArray();
+                            var passes_filter = !UseFiltering || filters.Any(x => name.ToUpper().Contains(x.ToUpper()));
+                            var passes_user_blacklist = !UseUserBlacklisting || !user_blacklist.Any(x => name.ToUpper().Contains(x.ToUpper()));
+                            if (passes_filter && passes_user_blacklist)
                             {
                                 Console.WriteLine($"Adding mbi {name.Split('\\').Last()}  {mbi.Protect} | {ProtectMode}");
                                 ProcessMemoryDomain pmd = new ProcessMemoryDomain(_p, mbi.BaseAddress, (long)mbi.RegionSize);
